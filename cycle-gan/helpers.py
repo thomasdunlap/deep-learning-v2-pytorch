@@ -17,6 +17,8 @@ import torch
 import numpy as np
 import scipy
 import scipy.misc
+import imageio
+
 
 
 def checkpoint(iteration, G_XtoY, G_YtoX, D_X, D_Y, checkpoint_dir='checkpoints_cyclegan'):
@@ -72,10 +74,10 @@ def save_samples(iteration, fixed_Y, fixed_X, G_YtoX, G_XtoY, batch_size=16, sam
     
     merged = merge_images(X, fake_Y, batch_size)
     path = os.path.join(sample_dir, 'sample-{:06d}-X-Y.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
     
     merged = merge_images(Y, fake_X, batch_size)
     path = os.path.join(sample_dir, 'sample-{:06d}-Y-X.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
